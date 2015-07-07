@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if ! service nginx status; then
+    body=`curl -s http://localhost/v1/_ping`
+else
+    body=`curl -s http://localhost:5000/v1/_ping`
+fi
+
+if [ "${body}" == "{}" ]; then
+    echo "Registry is running."
+    exit 0
+fi
+echo "Registry is not running."
+exit 2
