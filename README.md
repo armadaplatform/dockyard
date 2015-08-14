@@ -32,7 +32,11 @@ The service supports two storage options:
 
     You have to provide S3 bucket path with suitable access and secret keys:
 
-        armada run dockyard -e "REPOSITORY_PATH=s3:///com.initech.dockyard/" "AWS_ACCESS_KEY=..." "AWS_ACCESS_SECRET=..."
+        armada run dockyard -e "REPOSITORY_PATH=s3:///com-initech-dockyard/" "AWS_ACCESS_KEY=..." "AWS_ACCESS_SECRET=..."
+
+    Beware not to use dot character in your bucket name (e.g. `com.initech.dockyard`). Amazon's S3 SSL certificate
+    is valid only for first-level subdomains of `s3.amazonaws.com` through which API calls are made.
+    Requests to `https://com.initech.dockyard.s3.amazonaws.com` would be invalid and the dockyard wouldn't work.
 
 
 ## Securing dockyard.
@@ -75,7 +79,7 @@ Its key/value pairs correspond to the explained environment variables.
 E.g.:
 
     {
-        "REPOSITORY_PATH": "s3:///com.initech.dockyard/",
+        "REPOSITORY_PATH": "s3:///com-initech-dockyard/",
         "AWS_ACCESS_KEY": "xxx",
         "AWS_ACCESS_SECRET": "xxx",
 
